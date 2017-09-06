@@ -1,4 +1,4 @@
-package impsrc;
+package dataimport;
 
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
@@ -13,16 +13,16 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
-public class DataSourceModel {
+public class DataModel {
 
     private String filename;
-    ArrayList<DataSource> list = new ArrayList<>();
+    ArrayList<Data> list = new ArrayList<>();
 
-    public DataSourceModel(String filename) {
+    public DataModel(String filename) {
         this.filename = filename;
     }
 
-    public List<DataSource> getData() {
+    public void load() {
 
         XSSFWorkbook workbook = null;
         FileInputStream inputStream = null;
@@ -46,7 +46,7 @@ public class DataSourceModel {
 
         while (rowIterator.hasNext()) {
 
-            DataSource listItem = new DataSource();
+            Data listItem = new Data();
             Row row = rowIterator.next();
             Iterator<Cell> cellIterator = row.cellIterator();
             Cell cell = null;
@@ -69,11 +69,9 @@ public class DataSourceModel {
 
             list.add(listItem);
         }
-
-        return list;
     }
 
-    public int getSize() {
+    public int size() {
         return list.size();
     }
 
@@ -81,8 +79,12 @@ public class DataSourceModel {
         Collections.sort(list);
     }
 
+    public List<Data> getData() {
+        return list;
+    }
+
     public void printToConsole() {
-        for (DataSource item : list) {
+        for (Data item : list) {
             System.out.println(item);
         }
     }

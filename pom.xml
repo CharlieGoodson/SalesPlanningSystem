@@ -35,8 +35,8 @@
           <archive>
             <manifest>
               <addClasspath>true</addClasspath>
-              <mainClass>impsrc.Main</mainClass>
-              <packageName>impsrc</packageName>
+              <mainClass>dataimport.Main</mainClass>
+              <packageName>dataimport</packageName>
               <addClasspath>true</addClasspath>
               <classpathPrefix>lib/</classpathPrefix>
             </manifest>

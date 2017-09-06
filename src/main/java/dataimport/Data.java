@@ -1,6 +1,6 @@
-package impsrc;
+package dataimport;
 
-public class DataSource implements Comparable<DataSource> {
+public class Data implements Comparable<Data> {
 
     String ref;
     String title;
@@ -69,7 +69,7 @@ public class DataSource implements Comparable<DataSource> {
 
     @Override
     // для сортировки записей сначала по REF, потом по YEAR и потом по MONTH
-    public int compareTo(DataSource o) {
+    public int compareTo(Data o) {
         int x = this.ref.compareTo(o.ref);
         if (x == 0) {
             x = this.year - o.year;

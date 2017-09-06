@@ -1,6 +1,6 @@
-package impsrc;
+package modelofdatabase;
 
-public class Catalog {
+public class CatalogItem {
 
     int id;
     String ref;
