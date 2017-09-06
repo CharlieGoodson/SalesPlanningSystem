@@ -1,4 +1,4 @@
-package modelofdatabase;
+package model;
 
 public class Transaction {
     int year;

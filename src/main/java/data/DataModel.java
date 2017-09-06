@@ -1,9 +1,10 @@
-package dataimport;
+package data;
 
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import util.ConnectSettings;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -18,8 +19,9 @@ public class DataModel {
     private String filename;
     ArrayList<Data> list = new ArrayList<>();
 
-    public DataModel(String filename) {
-        this.filename = filename;
+    public DataModel() {
+        ConnectSettings settings = new ConnectSettings();
+        filename = settings.getSrc();
     }
 
     public void load() {

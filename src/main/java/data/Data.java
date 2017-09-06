@@ -1,13 +1,13 @@
-package dataimport;
+package data;
 
 public class Data implements Comparable<Data> {
 
-    String ref;
-    String title;
-    int year;
-    int month;
-    int sum;
-    int idCatalog; // внешний ключ к таблице CATALOG
+    private String ref;
+    private String title;
+    private int year;
+    private int month;
+    private int sum;
+    private int idCatalog; // внешний ключ к таблице CATALOG
 
     public String getRef() {
         return ref;

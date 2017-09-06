@@ -1,10 +1,15 @@
-package modelofdatabase;
+package model;
 
 public class CatalogItem {
 
     int id;
     String ref;
     String title;
+
+    public CatalogItem(String ref, String title) {
+        this.ref = ref;
+        this.title = title;
+    }
 
     public int getId() {
         return id;
