@@ -3,11 +3,7 @@ package dao;
 import model.CatalogItem;
 import util.ConnectSettings;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 
 public class DAO {
 
@@ -38,17 +34,16 @@ public class DAO {
         }
     }
 
+    // получает ключ товара из CATALOG по введенному REF
     public int getIdCatalogItem(String ref) {
-
         int id = 0;
-        String sql = "SELECT id FROM catalog WHERE ref = '" + ref + "'";
-
+        String sql = "SELECT id FROM catalog WHERE ref = ?";
         Connection connection = null;
         try {
             connection = getConnection();
-            Statement statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery(sql);
-
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1, ref);
+            ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()) {
                 id = resultSet.getInt(1);
             }
@@ -60,20 +55,27 @@ public class DAO {
         return id;
     }
 
-    public void insertCatalogItem(CatalogItem item) {
-        String sql = "INSERT INTO catalog (ref, title) values ('"
-                + item.getRef() + "', '" + item.getTitle() + "')";
-
+    // вставляет новую позицию в CATALOG и возвращает ее id
+    public int insertCatalogItem(CatalogItem item) {
+        int id = 0;
+        String sql = "INSERT INTO catalog (ref, title) VALUES (?, ?)";
         Connection connection = null;
         try {
             connection = getConnection();
-            Statement statement = connection.createStatement();
-            statement.execute(sql);
+            PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            statement.setString(1, item.getRef());
+            statement.setString(2, item.getTitle());
+            statement.execute();
 
+            ResultSet generatedKeys = statement.getGeneratedKeys();
+            if (generatedKeys.next()) {
+                id = generatedKeys.getInt(1);
+            }
         } catch (SQLException ex) {
             ex.printStackTrace();
         } finally {
             closeConnection(connection);
         }
+        return id;
     }
 }

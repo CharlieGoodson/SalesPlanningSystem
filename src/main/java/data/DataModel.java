@@ -54,7 +54,7 @@ public class DataModel {
             Cell cell = null;
 
             cell = cellIterator.next();
-            listItem.setRef(cell.getStringCellValue());
+            listItem.setRef(cell.getStringCellValue().toUpperCase());
 
             cell = cellIterator.next();
             listItem.setTitle(cell.getStringCellValue());
