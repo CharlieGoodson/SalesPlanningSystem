@@ -34,6 +34,7 @@ public class DAO {
         }
     }
 
+    /////////////////////////////////////////////////////
     // получает ключ товара из CATALOG по введенному REF
     public int getIdCatalogItem(String ref) {
         int id = 0;
@@ -55,6 +56,7 @@ public class DAO {
         return id;
     }
 
+    ///////////////////////////////////////////////////////
     // вставляет новую позицию в CATALOG и возвращает ее id
     public int insertCatalogItem(CatalogItem item) {
         int id = 0;
@@ -79,14 +81,15 @@ public class DAO {
         return id;
     }
 
-    // полностью очищает таблицу CATALOG и создает ее заново
-    public void recreateCatalog() {
+    /////////////////////////////////////////////////////
+    // создает таблицу CATALOG
+    public void createTableCatalog() {
         String sql1 = "DROP TABLE IF EXISTS catalog";
         String sql2 = "CREATE TABLE catalog (\n" +
-                "    id    INTEGER      PRIMARY KEY,\n" +
+                "    id    INTEGER      PRIMARY KEY AUTOINCREMENT\n" +
+                "                       NOT NULL,\n" +
                 "    ref   VARCHAR (16) UNIQUE,\n" +
-                "    title VARCHAR (64) \n" +
-                ");";
+                "    title VARCHAR (64))";
         Connection connection = null;
         try {
             connection = getConnection();

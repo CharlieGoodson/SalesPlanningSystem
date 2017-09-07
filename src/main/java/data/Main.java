@@ -16,7 +16,7 @@ public class Main {
 
         DAO dao = new DAO();
 
-        dao.recreateCatalog();
+        dao.createTableCatalog();
 
 
 //        int countInsert = 0;
