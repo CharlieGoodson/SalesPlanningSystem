@@ -78,4 +78,27 @@ public class DAO {
         }
         return id;
     }
+
+    // полностью очистить таблицу CATALOG
+    public void recreateCatalog() {
+        String sql1 = "DROP TABLE catalog";
+        String sql2 = "CREATE TABLE catalog (\n" +
+                "    id    INTEGER      PRIMARY KEY,\n" +
+                "    ref   VARCHAR (16) UNIQUE,\n" +
+                "    title VARCHAR (64) \n" +
+                ");";
+        Connection connection = null;
+        try {
+            connection = getConnection();
+            PreparedStatement statement = connection.prepareStatement(sql1);
+            statement.execute();
+            statement.close();
+            statement = connection.prepareStatement(sql2);
+            statement.execute();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } finally {
+            closeConnection(connection);
+        }
+    }
 }

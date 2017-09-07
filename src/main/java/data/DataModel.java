@@ -71,14 +71,11 @@ public class DataModel {
 
             list.add(listItem);
         }
+        Collections.sort(list);
     }
 
     public int size() {
         return list.size();
-    }
-
-    public void sort() {
-        Collections.sort(list);
     }
 
     public List<Data> getData() {
