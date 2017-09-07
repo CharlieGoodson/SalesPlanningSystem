@@ -79,9 +79,9 @@ public class DAO {
         return id;
     }
 
-    // полностью очистить таблицу CATALOG
+    // полностью очищает таблицу CATALOG и создает ее заново
     public void recreateCatalog() {
-        String sql1 = "DROP TABLE catalog";
+        String sql1 = "DROP TABLE IF EXISTS catalog";
         String sql2 = "CREATE TABLE catalog (\n" +
                 "    id    INTEGER      PRIMARY KEY,\n" +
                 "    ref   VARCHAR (16) UNIQUE,\n" +
