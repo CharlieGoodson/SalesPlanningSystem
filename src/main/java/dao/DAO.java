@@ -1,8 +1,8 @@
 package dao;
 
+import data.Data;
 import model.CatalogItem;
 import util.ConnectSettings;
-
 import java.sql.*;
 
 public class DAO {
@@ -34,7 +34,7 @@ public class DAO {
         }
     }
 
-    /////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////////////////////
     // получает ключ товара из CATALOG по введенному REF
     public int getIdCatalogItem(String ref) {
         int id = 0;
@@ -56,7 +56,7 @@ public class DAO {
         return id;
     }
 
-    ///////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////
     // вставляет новую позицию в CATALOG и возвращает ее id
     public int insertCatalogItem(CatalogItem item) {
         int id = 0;
@@ -81,7 +81,51 @@ public class DAO {
         return id;
     }
 
-    /////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////
+    // вставляет одну запись в SALES
+    public void insertDataItemToSales(Data item) {
+        String sql = "INSERT INTO sales (year, month, sum, id_catalog) VALUES (?, ?, ?, ?)";
+        Connection connection = null;
+        try {
+            connection = getConnection();
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setInt(1, item.getYear());
+            statement.setInt(2, item.getMonth());
+            statement.setInt(3, item.getSum());
+            statement.setInt(4, item.getIdCatalog());
+            statement.execute();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } finally {
+            closeConnection(connection);
+        }
+    }
+
+    ///////////////////////////////////////////////////////////////////////
+    // создает таблицу CATALOG
+    public void createTableSales() {
+        String sql1 = "DROP TABLE IF EXISTS sales";
+        String sql2 = "CREATE TABLE sales (\n" +
+                    "    year       INTEGER,\n" +
+                    "    month      INTEGER,\n" +
+                    "    sum        INTEGER,\n" +
+                    "    id_catalog INTEGER)";
+        Connection connection = null;
+        try {
+            connection = getConnection();
+            PreparedStatement statement = connection.prepareStatement(sql1);
+            statement.execute();
+            statement.close();
+            statement = connection.prepareStatement(sql2);
+            statement.execute();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } finally {
+            closeConnection(connection);
+        }
+    }
+
+    ///////////////////////////////////////////////////////////////////////
     // создает таблицу CATALOG
     public void createTableCatalog() {
         String sql1 = "DROP TABLE IF EXISTS catalog";

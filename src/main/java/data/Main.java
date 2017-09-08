@@ -9,62 +9,27 @@ public class Main {
 
     public static void main(String[] args) {
 
+//        DAO dao = new DAO();
+//        dao.createTableCatalog();
+//        dao.createTableSales();
+
         DataModel model = new DataModel();
         model.load();
+        System.out.println("... данные прочитаны!!!");
 
-        List<Data> list = model.getData();
+        model.pasteId();
+        System.out.println("... столбцы подставлены!!!");
 
-        DAO dao = new DAO();
+        model.saveToDb();
+        System.out.println("... данные успешно сохранены в базу!!!");
 
-        dao.createTableCatalog();
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
 
-
-//        int countInsert = 0;
-//        int countSelect = 0;
-//
-//        for (Data item : list) {
-//            String ref = item.getRef();
-//            int id = dao.getIdCatalogItem(ref);
-//            countSelect++;
-//            if (id == 0) {
-//                id = dao.insertCatalogItem(new CatalogItem(item.getRef(), item.getTitle()));
-//                countInsert++;
-//            }
-//            item.setIdCatalog(id);
-//        }
-
-        //////////////////////////////////////////////////////////////////////////////
-        // Подставляет поле id_catalog в класс DATA для связи с таблицей CATALOG
-//        int countInsert = 0;
-//        int countSelect = 0;
-//
-//        String ref = list.get(0).getRef();
-//        int id = dao.getIdCatalogItem(ref);
-//        countSelect++;
-//        if (id == 0) {
-//            id = dao.insertCatalogItem(new CatalogItem(ref, list.get(0).getTitle()));
-//            countInsert++;
-//        }
-//
-//        for (Data item : list) {
-//            if (item.getRef().equals(ref)) {
-//                item.setIdCatalog(id);
-//                continue;
-//            }
-//            ref = item.getRef();
-//            id = dao.getIdCatalogItem(ref);
-//            countSelect++;
-//            if (id == 0) {
-//                id = dao.insertCatalogItem(new CatalogItem(ref, list.get(0).getTitle()));
-//                countInsert++;
-//            }
-//            item.setIdCatalog(id);
-//        }
-//        /////////////////////////////////////////////////////////////////////////////
-//        System.out.println("После подстановки ID");
-//        model.printToConsole();
-//        System.out.println("countInsert - " + countInsert);
-//        System.out.println("countSelect - " + countSelect);
-
+        model.printToConsole();
+        System.out.println("Выгружено строк: " + model.size());
     }
 }
