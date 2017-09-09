@@ -1,7 +1,7 @@
 // Класс, который полностью отвечает за импорт исходных данных о фактических
 // помесячных продажах с внешнего файла с данными *.xlsx.
 // 1 - сначала метод load() считывает, загружает в память и сортирует данные в виде списка
-// 2 - затем метод pasteId() подставляет в поле IdCatalog id из соответсвующей позиции Catalog
+// 2 - затем метод pasteId() подставляет в поле idCatalog id из соответсвующей позиции Catalog
 // 3 - метод saveToDb() сохраняет считанные данные в базу данных в таблицу Sale.
 
 package data;
@@ -100,7 +100,7 @@ public class DataModel {
             ref = item.getRef();
             id = dao.getIdCatalogItem(ref);
             if (id == 0) {
-                id = dao.insertCatalogItem(new CatalogItem(ref, list.get(0).getTitle()));
+                id = dao.insertCatalogItem(new CatalogItem(ref, item.getTitle())); ////!!!!!! Тут была ошибка!!!!!
             }
             item.setIdCatalog(id);
         }
@@ -137,7 +137,7 @@ public class DataModel {
 
     /////////////////////////////////////////////////////////////////////////////////
     // Подставляет поле id_catalog в класс DATA для связи с таблицей CATALOG
-    // (упрощенный альтернативный метод, не основной)
+    // Упрощенный альтернативный метод, не основной. Здесь не оптимизированы обращения к DB.
     public void pasteIdAlt() {
         DAO dao = new DAO();
         for (Data item : list) {
