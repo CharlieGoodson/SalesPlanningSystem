@@ -44,7 +44,7 @@ public class SalesRow {
 
     @Override
     public String toString() {
-        String str = "| ";
+        String str = " | ";
         for (Transaction transaction : factPeriod) {
             str += transaction.getSum() + " | ";
         }
