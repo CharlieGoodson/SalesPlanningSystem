@@ -43,9 +43,6 @@ public class CatalogItem {
 
     @Override
     public String toString() {
-        return "{id=" + id +
-                ", ref='" + ref + '\'' +
-                ", title='" + title + '\'' +
-                '}';
+        return id + " | " + ref + " | " + title;
     }
 }

@@ -44,8 +44,10 @@ public class SalesRow {
 
     @Override
     public String toString() {
-        return catalog +
-                ", factPeriod=" + factPeriod +
-                "}";
+        String str = "| ";
+        for (Transaction transaction : factPeriod) {
+            str += transaction.getSum() + " | ";
+        }
+        return catalog + str;
     }
 }
