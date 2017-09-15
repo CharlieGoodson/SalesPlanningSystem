@@ -162,7 +162,10 @@ public class DAO {
                     "    year       INTEGER,\n" +
                     "    month      INTEGER,\n" +
                     "    sum        INTEGER,\n" +
-                    "    id_catalog INTEGER)";
+                    "    id_catalog INTEGER,\n" +
+                // добавляет первичный ключ по трем полям год, месяц и id_catalog
+                // защита от повторного импорта тех же данных
+                    "    CONSTRAINT pk PRIMARY KEY (year, month, id_catalog))";
         Connection connection = null;
         try {
             connection = getConnection();
