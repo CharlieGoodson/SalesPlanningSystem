@@ -2,7 +2,10 @@ package data;
 
 import dao.DAO;
 import model.CatalogItem;
+import model.SalesRow;
+import model.Transaction;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Main {
@@ -23,13 +26,43 @@ public class Main {
         model.saveToDb();
         System.out.println("... данные успешно сохранены в базу!!!");
 
-        try {
-            Thread.sleep(3000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
+
+
+        ///////////  Код который разворачивает столбцы в строки в таблице   /////////////
+
+        List<Transaction> listSales = dao.getAllFromSales();
+        List<SalesRow> listRow = new ArrayList<>();
+
+        int id = listSales.get(0).getIdCatalog();
+        CatalogItem catalogItem = dao.getCatalogItem(id);
+        SalesRow row = new SalesRow();
+        row.setCatalog(catalogItem);
+        List<Transaction> list = new ArrayList<>();
+        row.setFactPeriod(list);
+        listRow.add(row);
+
+        for (Transaction item : listSales) {
+
+            if (id == item.getIdCatalog()) {
+                list.add(item);
+
+            } else {
+                id = item.getIdCatalog();
+                catalogItem = dao.getCatalogItem(id);
+                row = new SalesRow();
+                row.setCatalog(catalogItem);
+                list = new ArrayList<>();
+                row.setFactPeriod(list);
+                list.add(item);
+                listRow.add(row);
+            }
+        }
+        ///////////////////////////////////////////////////////////////////
+
+
+        for (SalesRow rowPr : listRow) {
+            System.out.println(rowPr);
         }
 
-        model.printToConsole();
-        System.out.println("Выгружено строк: " + model.size());
     }
 }

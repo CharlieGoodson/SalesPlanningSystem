@@ -2,8 +2,11 @@ package dao;
 
 import data.Data;
 import model.CatalogItem;
+import model.Transaction;
 import util.ConnectSettings;
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class DAO {
 
@@ -99,6 +102,56 @@ public class DAO {
         } finally {
             closeConnection(connection);
         }
+    }
+
+    /////////////////////////////////////////////////////////////////////////////////
+    // получает строку из CATALOG по ID
+    public CatalogItem getCatalogItem(int id) {
+        String sql = "SELECT ref, title FROM catalog WHERE id = ?";
+        Connection connection = null;
+        CatalogItem item = null;
+        try {
+            connection = getConnection();
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setInt(1, id);
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                String ref = resultSet.getString(1);
+                String title = resultSet.getString(2);
+                item = new CatalogItem(id, ref, title);
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } finally {
+            closeConnection(connection);
+        }
+        return item;
+    }
+
+    /////////////////////////////////////////////////////////////////////////////////
+    // считывает все записи из таблицы SALES
+    public List<Transaction> getAllFromSales() {
+        List<Transaction> list = new ArrayList<>();
+        String sql = "SELECT * FROM sales";
+        Connection connection = null;
+        try {
+            connection = getConnection();  //step 1
+            PreparedStatement statement = connection.prepareStatement(sql);  // for proper db handling  - step 2
+            ResultSet resultSet = statement.executeQuery();  // step 3
+            while (resultSet.next()) {
+                int year = resultSet.getInt(1);
+                int month = resultSet.getInt(2);
+                int sum = resultSet.getInt(3);
+                int idCatalog = resultSet.getInt(4);
+                Transaction transaction = new Transaction(year, month, sum, idCatalog);
+                list.add(transaction);
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } finally {
+            closeConnection(connection);
+        }
+        return list;
     }
 
     ///////////////////////////////////////////////////////////////////////

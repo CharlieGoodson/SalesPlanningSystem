@@ -2,11 +2,17 @@ package model;
 
 public class CatalogItem {
 
-    int id;
-    String ref;
-    String title;
+    private int id;
+    private String ref;
+    private String title;
 
     public CatalogItem(String ref, String title) {
+        this.ref = ref;
+        this.title = title;
+    }
+
+    public CatalogItem(int id, String ref, String title) {
+        this.id = id;
         this.ref = ref;
         this.title = title;
     }
@@ -33,5 +39,13 @@ public class CatalogItem {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    @Override
+    public String toString() {
+        return "{id=" + id +
+                ", ref='" + ref + '\'' +
+                ", title='" + title + '\'' +
+                '}';
     }
 }
