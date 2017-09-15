@@ -59,6 +59,7 @@ public class Main {
         ///////////////////////////////////////////////////////////////////
 
         for (SalesRow rowPr : listRow) {
+            rowPr.makePlanAndIndexPeriod(1.5);
             System.out.println(rowPr);
         }
 

@@ -1,5 +1,6 @@
 package model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class SalesRow {
@@ -10,8 +11,20 @@ public class SalesRow {
 
     private List<Transaction> planPeriod;
 
-    private final static double COEF = 1.5;
+    private List<Transaction> cloneAndIndexPeriod(List<Transaction> period, double coef) {
+        List<Transaction> list = new ArrayList<>();
+        Transaction temp;
+        for (Transaction item : period) {
+            temp = item.clone();
+            temp.index(coef);
+            list.add(temp);
+        }
+        return list;
+    }
 
+    public void makePlanAndIndexPeriod(double coef) {
+        planPeriod = cloneAndIndexPeriod(factPeriod, coef);
+    }
 
 
     public Catalog getCatalog() {
@@ -38,16 +51,16 @@ public class SalesRow {
         this.planPeriod = planPeriod;
     }
 
-    public static double getCoef() {
-        return COEF;
-    }
-
     @Override
     public String toString() {
         String str = catalog + "| ";
         for (Transaction transaction : factPeriod) {
             str += transaction.getSum() + " | ";
         }
+        for (Transaction transaction : planPeriod) {
+            str += transaction.getSum() + " | ";
+        }
+
         return str;
     }
 }

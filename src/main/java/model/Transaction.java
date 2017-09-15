@@ -13,6 +13,15 @@ public class Transaction {
         this.idCatalog = idCatalog;
     }
 
+    public Transaction clone() {
+        Transaction temp = new Transaction(year, month, sum, idCatalog);
+        return temp;
+    }
+
+    public void index(double coef) {
+        sum = (int) Math.round(sum * coef);
+    }
+
     public int getYear() {
         return year;
     }
