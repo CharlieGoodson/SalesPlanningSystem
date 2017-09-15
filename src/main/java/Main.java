@@ -1,7 +1,6 @@
-package data;
-
 import dao.DAO;
-import model.CatalogItem;
+import data.DataModel;
+import model.Catalog;
 import model.SalesRow;
 import model.Transaction;
 
@@ -34,7 +33,7 @@ public class Main {
         List<SalesRow> listRow = new ArrayList<>();
 
         int id = listSales.get(0).getIdCatalog();
-        CatalogItem catalogItem = dao.getCatalogItem(id);
+        Catalog catalogItem = dao.getCatalogItem(id);
         SalesRow row = new SalesRow();
         row.setCatalog(catalogItem);
         List<Transaction> list = new ArrayList<>();

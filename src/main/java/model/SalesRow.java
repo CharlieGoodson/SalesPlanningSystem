@@ -4,21 +4,21 @@ import java.util.List;
 
 public class SalesRow {
 
-    private CatalogItem catalog;
+    private Catalog catalog;
 
     private List<Transaction> factPeriod;
 
-    private List<Transaction> planPeriod;  // sales forecasdt with coef applied
+    private List<Transaction> planPeriod;
 
-    private final static double coef = 1.5;
+    private final static double COEF = 1.5;
 
 
 
-    public CatalogItem getCatalog() {
+    public Catalog getCatalog() {
         return catalog;
     }
 
-    public void setCatalog(CatalogItem catalog) {
+    public void setCatalog(Catalog catalog) {
         this.catalog = catalog;
     }
 
@@ -39,15 +39,15 @@ public class SalesRow {
     }
 
     public static double getCoef() {
-        return coef;
+        return COEF;
     }
 
     @Override
     public String toString() {
-        String str = " | ";
+        String str = catalog + " | ";
         for (Transaction transaction : factPeriod) {
             str += transaction.getSum() + " | ";
         }
-        return catalog + str;
+        return str;
     }
 }

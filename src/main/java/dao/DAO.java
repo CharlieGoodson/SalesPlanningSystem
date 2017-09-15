@@ -1,7 +1,7 @@
 package dao;
 
 import data.Data;
-import model.CatalogItem;
+import model.Catalog;
 import model.Transaction;
 import util.ConnectSettings;
 import java.sql.*;
@@ -61,7 +61,7 @@ public class DAO {
 
     ////////////////////////////////////////////////////////////////////////////////////
     // вставляет новую позицию в CATALOG и возвращает ее id
-    public int insertCatalogItem(CatalogItem item) {
+    public int insertCatalogItem(Catalog item) {
         int id = 0;
         String sql = "INSERT INTO catalog (ref, title) VALUES (?, ?)";
         Connection connection = null;
@@ -106,10 +106,10 @@ public class DAO {
 
     /////////////////////////////////////////////////////////////////////////////////
     // получает строку из CATALOG по ID
-    public CatalogItem getCatalogItem(int id) {
+    public Catalog getCatalogItem(int id) {
         String sql = "SELECT ref, title FROM catalog WHERE id = ?";
         Connection connection = null;
-        CatalogItem item = null;
+        Catalog item = null;
         try {
             connection = getConnection();
             PreparedStatement statement = connection.prepareStatement(sql);
@@ -118,7 +118,7 @@ public class DAO {
             if (resultSet.next()) {
                 String ref = resultSet.getString(1);
                 String title = resultSet.getString(2);
-                item = new CatalogItem(id, ref, title);
+                item = new Catalog(id, ref, title);
             }
         } catch (SQLException ex) {
             ex.printStackTrace();

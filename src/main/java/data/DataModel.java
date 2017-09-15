@@ -7,7 +7,7 @@
 package data;
 
 import dao.DAO;
-import model.CatalogItem;
+import model.Catalog;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
@@ -90,7 +90,7 @@ public class DataModel {
         String ref = list.get(0).getRef();
         int id = dao.getIdCatalogItem(ref);
         if (id == 0) {
-            id = dao.insertCatalogItem(new CatalogItem(ref, list.get(0).getTitle()));
+            id = dao.insertCatalogItem(new Catalog(ref, list.get(0).getTitle()));
         }
         for (Data item : list) {
             if (item.getRef().equals(ref)) {
@@ -100,7 +100,7 @@ public class DataModel {
             ref = item.getRef();
             id = dao.getIdCatalogItem(ref);
             if (id == 0) {
-                id = dao.insertCatalogItem(new CatalogItem(ref, item.getTitle())); ////!!!!!! Тут была ошибка!!!!!
+                id = dao.insertCatalogItem(new Catalog(ref, item.getTitle())); ////!!!!!! Тут была ошибка!!!!!
             }
             item.setIdCatalog(id);
         }
@@ -144,7 +144,7 @@ public class DataModel {
             String ref = item.getRef();
             int id = dao.getIdCatalogItem(ref);
             if (id == 0) {
-                id = dao.insertCatalogItem(new CatalogItem(item.getRef(), item.getTitle()));
+                id = dao.insertCatalogItem(new Catalog(item.getRef(), item.getTitle()));
             }
             item.setIdCatalog(id);
         }

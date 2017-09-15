@@ -1,17 +1,17 @@
 package model;
 
-public class CatalogItem {
+public class Catalog {
 
     private int id;
     private String ref;
     private String title;
 
-    public CatalogItem(String ref, String title) {
+    public Catalog(String ref, String title) {
         this.ref = ref;
         this.title = title;
     }
 
-    public CatalogItem(int id, String ref, String title) {
+    public Catalog(int id, String ref, String title) {
         this.id = id;
         this.ref = ref;
         this.title = title;
