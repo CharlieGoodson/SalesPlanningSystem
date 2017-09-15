@@ -121,6 +121,7 @@ public class DataModel {
     public int size() {
         return list.size();
     }
+
     //////////////////////////////////////////////////////////
     // Возвращает сам список прочитаных данных
     public List<Data> getData() {

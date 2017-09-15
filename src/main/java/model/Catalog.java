@@ -43,6 +43,6 @@ public class Catalog {
 
     @Override
     public String toString() {
-        return id + " | " + ref + " | " + title;
+        return id + " | " + ref + " | " + title + " |";
     }
 }

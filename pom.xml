@@ -35,8 +35,8 @@
           <archive>
             <manifest>
               <addClasspath>true</addClasspath>
-              <mainClass>data.Main</mainClass>
-              <packageName>data</packageName>
+              <mainClass>Main</mainClass>
+              <packageName></packageName>
               <addClasspath>true</addClasspath>
               <classpathPrefix>lib/</classpathPrefix>
             </manifest>

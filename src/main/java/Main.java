@@ -58,7 +58,6 @@ public class Main {
         }
         ///////////////////////////////////////////////////////////////////
 
-
         for (SalesRow rowPr : listRow) {
             System.out.println(rowPr);
         }
